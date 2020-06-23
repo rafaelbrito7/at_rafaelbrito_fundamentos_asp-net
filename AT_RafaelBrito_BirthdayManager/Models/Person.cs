@@ -18,6 +18,21 @@ namespace AT_RafaelBrito_BirthdayManager.Models
         [Display(Name = "Aniversário(Mês/Dia)")]
         public DateTime Birthday { get; set; }
 
+
+        public Person()
+        {
+
+        }
+
+        public Person(Guid id, string firstName, string surname, DateTime birthday)
+        {
+            Id = id;
+            Firstname = firstName;
+            Surname = surname;
+            Birthday = birthday;
+        }
+
+
         public int DaysForBirthday()
         {
             DateTime birthday = new DateTime(DateTime.Now.Year, Birthday.Month, Birthday.Day);

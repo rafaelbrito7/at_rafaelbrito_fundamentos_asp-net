@@ -18,10 +18,8 @@ namespace AT_RafaelBrito_BirthdayManager.Controllers
 
         public IActionResult Index()
         {
-            List<Person> people = PeopleRepository.getAll().FindAll(person => !(person.Birthday.Day == DateTime.Now.Day && person.Birthday.Month == DateTime.Now.Month));
-            List<Person> birthdayPeople = PeopleRepository.getAll().FindAll(person => person.Birthday.Day == DateTime.Now.Day && person.Birthday.Month == DateTime.Now.Month);
-
-            people = people.OrderBy(person => person.DaysForBirthday()).ToList();
+            List<Person> people = PeopleRepository.getAllOrdered().FindAll(person => !(person.Birthday.Day == DateTime.Now.Day && person.Birthday.Month == DateTime.Now.Month));
+            List<Person> birthdayPeople = PeopleRepository.GetBirthdayPeople();
 
             return View(new List<List<Person>> { birthdayPeople, people });
         }
@@ -32,6 +30,7 @@ namespace AT_RafaelBrito_BirthdayManager.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public IActionResult New(Person person)
         {
@@ -41,10 +40,11 @@ namespace AT_RafaelBrito_BirthdayManager.Controllers
             return RedirectToAction("Index", "People");
         }
 
-        public IActionResult Search(string name)
+        
+        public ActionResult GetPeopleByName(string name)
         {
-            var model = PeopleRepository.Search(name);
-            return View("Dashboard", model);
+            List<Person> people = PeopleRepository.GetPeopleByName(name);
+            return View(people);
         }
         
 

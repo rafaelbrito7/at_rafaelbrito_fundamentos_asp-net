@@ -1,0 +1,40 @@
+﻿@model List<AT_RafaelBrito_BirthdayManager.Models.Person>
+
+@{
+    ViewData["Title"] = "GetPeopleByName";
+}
+
+<h1>Pesquisa</h1>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Sobrenome
+            </th>
+            <th>
+                Aniversário(MM/DD)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Firstname
+                </td>
+                <td>
+                    @item.Surname
+                </td>
+                <td>
+                    @item.Birthday.Month/@item.Birthday.Day
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
